@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        * {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canv">
+    </canvas>
+
+    <script>
+        document.addEventListener("keydown", keydown);
+        
+        function keydown(e){
+            if (keysDown.length == 1){
+                keysDown.splice(0, 1)
+            }
+            if (!keysDown.includes(e.code)){
+                keysDown.push(e.code);
+            }
+        }
+
+        let keysDown = [];
+        
+        let ms = 20;
+        let fps = 1000 / ms;
+        
+        
+        let snake = [{x: 80, y: 10}, {x: 60, y: 10}, {x: 40, y: 10}, {x: 20, y: 10}]
+        
+
+        //Updates position of snake segments
+        function updateBody(){
+            //new array to hold positions
+            let newSnake = []
+            //set first segment position after the head moves
+            newSnake[0] = {x: snake[0].x, y: snake[0].y}
+            //iterate through each other segment and update position
+            for(let i = 1; i < snake.length; i++){
+                newSnake[i] = {x: snake[i-1].x, y: snake[i-1].y}
+            }
+            //declare updated array as snake
+            snake = newSnake
+        }
+
+        function moveHead(){ 
+            if(keysDown.includes("ArrowLeft"))
+                snake[0].x -= 20
+               
+            if(keysDown.includes("ArrowRight"))
+                snake[0].x += 20   
+
+            if(keysDown.includes("ArrowUp"))
+                snake[0].y -= 20   
+
+            if(keysDown.includes("ArrowDown"))
+                snake[0].y += 20
+        }
+
+        //draws each segment
+        function draw(ctx){
+            ctx.fillStyle = "gray"
+            ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height)
+            
+            for(let segment of snake){ 
+                ctx.fillStyle = "green"
+                ctx.fillRect(segment.x, segment.y, 20, 20) 
+            }
+        }
+        
+        function gameLoop(){
+            let canvas = document.querySelector("#canv")
+            let ctx = canvas.getContext("2d")
+
+            canvas.width = window.innerWidth
+            canvas.height = window.innerHeight
+
+           
+            //move the head first
+            moveHead()
+            //then update the body
+            updateBody()
+            //draw
+            draw(ctx)
+        }
+
+        setInterval(gameLoop, ms)
+
+    </script>
+    
+</body>
+</html>
