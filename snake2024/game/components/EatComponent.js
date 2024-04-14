@@ -22,11 +22,10 @@ class EatComponent extends Component{
             this.transform.y = Math.floor(Math.random() * ctx.canvas.height)
             Globals.score++
             if (Globals.score % 5 == 0){
-                Globals.speed += 10
+                Globals.speed += 20
             }
         }
     }
 }
 
 window.EatComponent = EatComponent
-export default EatComponent

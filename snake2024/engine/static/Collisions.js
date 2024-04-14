@@ -40,4 +40,3 @@ class Collisions {
 }
 
 window.Collisions = Collisions
-export default Collisions

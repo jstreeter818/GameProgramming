@@ -3,7 +3,8 @@ class EventSystem{
     static registerListener(listener){
         EventSystem.listeners.push(listener)
     }
-    static eatEvent(event){
+
+    static fireEvent(event){
         for(let listener of EventSystem.listeners){
             if(listener.handleEvent){
                 listener.handleEvent(event)
@@ -13,4 +14,3 @@ class EventSystem{
 }
 
 window.EventSystem = EventSystem
-export default EventSystem

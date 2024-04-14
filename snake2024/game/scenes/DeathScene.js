@@ -4,7 +4,8 @@ import "../components/EndSceneCounterComponent.js"
 class DeathScene extends Scene {
     constructor(){
         super("black")
-
+    }
+    start(ctx){
         Input.keysDown.splice(0, 1)
 
         let scoreGameObject = new GameObject()
@@ -27,4 +28,3 @@ class DeathScene extends Scene {
 }
 
 window.DeathScene = DeathScene
-export default DeathScene

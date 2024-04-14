@@ -15,4 +15,3 @@ class EndSceneCounterComponent extends Component{
 }
   
 window.EndSceneCounterComponent = EndSceneCounterComponent
-export default EndSceneCounterComponent

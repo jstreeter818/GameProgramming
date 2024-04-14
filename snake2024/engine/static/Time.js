@@ -5,4 +5,3 @@ class Time{
 }
 
 window.Time = Time
-export default Time

@@ -1,6 +1,7 @@
 class DeathComponent extends Component{
     constructor(){
         super()
+        EventSystem.registerListener(this)
     }
     update(ctx){
         let snakeGameObject = null
@@ -23,4 +24,3 @@ class DeathComponent extends Component{
 }
 
 window.DeathComponent = DeathComponent
-export default DeathComponent

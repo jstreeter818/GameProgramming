@@ -1,5 +1,5 @@
 class Circle extends Component{
-    constructor(fill = "green", stroke = "purple"){
+    constructor(fill = "blue", stroke = "purple"){
         super()
         this.fill = fill
         this.stroke = stroke
@@ -13,7 +13,9 @@ class Circle extends Component{
         ctx.fill()
         ctx.stroke()
     }
+    asGeometry(){
+        return new Circle2(this.transform.x, this.transform.y, this.transform.scaleX)
+    }
 }
 
 window.Circle = Circle
-export default Circle
