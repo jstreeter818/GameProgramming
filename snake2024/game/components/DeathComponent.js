@@ -3,21 +3,24 @@ class DeathComponent extends Component{
         super()
         EventSystem.registerListener(this)
     }
+    handleEvent(event){
+        // handle collision with snake head and snake body
+    }
     update(ctx){
-        let snakeGameObject = null
+        let snakeHeadGameObject = null
         for (let gameObject of Engine.currentScene.gameObjects){
-            if(gameObject.name == "SnakeGameObject"){
-                snakeGameObject = gameObject
+            if(gameObject.name == "SnakeHeadGameObject"){
+                snakeHeadGameObject = gameObject
             }
         }
 
-        if (!snakeGameObject) return;
+        if (!snakeHeadGameObject) return;
 
         if (
-            snakeGameObject.transform.x <= 0 ||
-            snakeGameObject.transform.y <= 0 ||
-            snakeGameObject.transform.scaleX + snakeGameObject.transform.x >= ctx.canvas.width ||
-            snakeGameObject.transform.scaleY + snakeGameObject.transform.y >= ctx.canvas.height){
+            snakeHeadGameObject.transform.x <= 0 ||
+            snakeHeadGameObject.transform.y <= 0 ||
+            snakeHeadGameObject.transform.scaleX + snakeHeadGameObject.transform.x >= ctx.canvas.width ||
+            snakeHeadGameObject.transform.scaleY + snakeHeadGameObject.transform.y >= ctx.canvas.height){
                 Engine.currentScene = new DeathScene()
             }
     }

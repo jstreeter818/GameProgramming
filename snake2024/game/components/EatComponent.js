@@ -3,27 +3,28 @@ class EatComponent extends Component{
         super()
     }
     update(ctx){
-        let snakeGameObject = null
+        let snakeHeadGameObject = null
         for (let gameObject of Engine.currentScene.gameObjects){
-            if(gameObject.name == "SnakeGameObject"){
-                snakeGameObject = gameObject
+            if(gameObject.name == "SnakeHeadGameObject"){
+                snakeHeadGameObject = gameObject
             }
         }
         
-        if (!snakeGameObject) return;
+        if (!snakeHeadGameObject) return;
 
         let collision = Collisions.isRectangleRectangleCollision(
             (this.transform.x + this.transform.scaleX), this.transform.x, this.transform.y, (this.transform.y + this.transform.scaleY),
-            (snakeGameObject.transform.x + snakeGameObject.transform.scaleX), snakeGameObject.transform.x, snakeGameObject.transform.y, (snakeGameObject.transform.y + snakeGameObject.transform.scaleY))
+            (snakeHeadGameObject.transform.x + snakeHeadGameObject.transform.scaleX), snakeHeadGameObject.transform.x, snakeHeadGameObject.transform.y, (snakeHeadGameObject.transform.y + snakeHeadGameObject.transform.scaleY))
             
         // add increase in speed and add one unit to snake
         if (collision){
             this.transform.x = Math.floor(Math.random() * ctx.canvas.width)
             this.transform.y = Math.floor(Math.random() * ctx.canvas.height)
-            Globals.score++
-            if (Globals.score % 5 == 0){
-                Globals.speed += 20
+            let event = {
+                origin: this,
+                name: "foodCollision"
             }
+            EventSystem.fireEvent(event)
         }
     }
 }

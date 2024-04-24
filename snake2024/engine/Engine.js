@@ -41,17 +41,19 @@ class Engine {
             }
         }
 
-        Engine.currentScene.draw(ctx)
-
         if(!Engine.isSystemPaused){
             Engine.currentScene._start(ctx)
 
             Engine.currentScene.update(ctx)
 
-            Engine.currentScene.gameObjects = Engine.currentScene.gameObjects.filter(go => go.markForDestroy = false)
+            Engine.currentScene.draw(ctx)
+
+            Engine.currentScene.gameObjects = Engine.currentScene.gameObjects.filter(go => go.markForDestroy == false)
         }
 
         Input.update()
+
+        Time.update()
     }
 
     static setup(){

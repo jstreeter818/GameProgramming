@@ -10,24 +10,18 @@ class Input{
     }
 
     static mouseup(e){
-        Input.mousePosition.x = e.clientX
-        Input.mousePosition.y = e.clientY
+        Input.mouseUpThisFrame = true
     }
 
     static keyup(e){
-        //not using this code is also game specific
-        //let index = Input.keysDown.indexOf(e.code)
-        //Input.keysDown.splice(index, 1)
+        let index = Input.keysDown.indexOf(e.code)
+        Input.keysDown.splice(index, 1)
+        Input.keysUpThisFrame.push(e.code)
     }
 
     static keydown(e){
-        // This logic is game specific - should probably change/move this
-        if (Input.keysDown.length == 1){
-            Input.keysDown.splice(0, 1)
-        }
-        if (!Input.keysDown.includes(e.code)) {
+        if(!Input.keysDown.includes(e.code))
             Input.keysDown.push(e.code)
-        }
     }
 
     static update(){

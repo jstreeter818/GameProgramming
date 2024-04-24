@@ -4,8 +4,8 @@ class ScoreUpdaterComponent extends Component {
       EventSystem.registerListener(this)
     }
     handleEvent(event){
-      if(event.name == "scoreUpdate"){
-        Globals.score += event.origin.scoreValue
+      if(event.name == "foodCollision"){
+        Globals.score += 1
       }
     }
     update(){
