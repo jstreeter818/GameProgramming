@@ -16,7 +16,7 @@ class EatComponent extends Component{
             (this.transform.x + this.transform.scaleX), this.transform.x, this.transform.y, (this.transform.y + this.transform.scaleY),
             (snakeHeadGameObject.transform.x + snakeHeadGameObject.transform.scaleX), snakeHeadGameObject.transform.x, snakeHeadGameObject.transform.y, (snakeHeadGameObject.transform.y + snakeHeadGameObject.transform.scaleY))
             
-        // add increase in speed and add one unit to snake
+        // fire collision event and change position of food
         if (collision){
             this.transform.x = Math.floor(Math.random() * ctx.canvas.width)
             this.transform.y = Math.floor(Math.random() * ctx.canvas.height)

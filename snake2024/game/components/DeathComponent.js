@@ -1,10 +1,6 @@
 class DeathComponent extends Component{
     constructor(){
         super()
-        EventSystem.registerListener(this)
-    }
-    handleEvent(event){
-        // handle collision with snake head and snake body
     }
     update(ctx){
         let snakeHeadGameObject = null
@@ -16,6 +12,20 @@ class DeathComponent extends Component{
 
         if (!snakeHeadGameObject) return;
 
+        // Check collision between snake head and body segments
+        // Needs fixed - breaks when turning with 2 body segments because the corners are colliding
+        for (let gameObject of Engine.currentScene.gameObjects){
+            if(gameObject.name == "BodySegmentGameObject" && !gameObject.isLinkedToHead){
+                let collision = Collisions.isRectangleRectangleCollision(
+                    (gameObject.transform.x + gameObject.transform.scaleX), gameObject.transform.x, gameObject.transform.y, (gameObject.transform.y + gameObject.transform.scaleY),
+                    (snakeHeadGameObject.transform.x + snakeHeadGameObject.transform.scaleX), snakeHeadGameObject.transform.x, snakeHeadGameObject.transform.y, (snakeHeadGameObject.transform.y + snakeHeadGameObject.transform.scaleY))
+                if(collision){
+                    Engine.currentScene = new DeathScene()
+                }
+            }
+        }
+
+        // Check collision between snake head and screen boundary
         if (
             snakeHeadGameObject.transform.x <= 0 ||
             snakeHeadGameObject.transform.y <= 0 ||

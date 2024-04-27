@@ -1,9 +1,9 @@
 class BodySegmentGameObject extends GameObject{
-    constructor(name = "BodySegmentGameObject"){
+    constructor(isLinkedToHead, name = "BodySegmentGameObject"){
         super(name);
         this.addComponent(new Rectangle("black"))
+        this.isLinkedToHead = isLinkedToHead
     }
-    
 }
 
 window.BodySegmentGameObject = BodySegmentGameObject

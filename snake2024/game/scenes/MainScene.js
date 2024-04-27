@@ -20,13 +20,8 @@ class MainScene extends Scene {
     snakeHeadGameObject.addComponent(new DeathComponent())
     GameObject.instantiate(snakeHeadGameObject, Math.floor(Math.random() * ctx.canvas.width), Math.floor(Math.random() * ctx.canvas.height), 20, 20)
 
-    let snakeBodyGameObject = new GameObject("SnakeBodyGameObject")
-    snakeBodyGameObject.addComponent(new Rectangle("black"))
-    GameObject.instantiate(snakeBodyGameObject, snakeHeadGameObject.transform.x, snakeHeadGameObject.transform.y - 20, 20, 20)
+    snakeHeadGameObject.getComponent("KeyboardComponent").nextBodyPart = snakeHeadGameObject
 
-    snakeHeadGameObject.getComponent("KeyboardComponent").nextBodyPart = snakeBodyGameObject
-
-    
     GameObject.instantiate(new FoodGameObject(), Math.floor(Math.random() * ctx.canvas.width), Math.floor(Math.random() * ctx.canvas.height), 20, 20)
 
     let scoreGameObject = new GameObject()

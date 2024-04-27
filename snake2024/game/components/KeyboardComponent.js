@@ -4,15 +4,16 @@ class KeyboardComponent extends Component{
     left = "LEFT"
     right = "RIGHT"
 
-    nextBodySegment
+    //nextBodySegment
 
     constructor(){
         super()
         this.timeLeftToMove = 1
         this.timeBetweenMoves = 1
-        this.nextMove = this.down
+        this.nextMove = null
         this.speed = 20
         this.isGrowingThisFrame = false
+        this.isLinkedToHead
         
     }
     start(){
@@ -21,12 +22,12 @@ class KeyboardComponent extends Component{
 
     handleEvent(event){
         if(event.name == "foodCollision"){
-            console.log(event.name)
             this.isGrowingThisFrame = true
         }
     }
+
     update(){
-        
+        // update input and store the next move
         if (Input.keysDown.includes("ArrowLeft"))
             this.nextMove = this.left
         if (Input.keysDown.includes("ArrowRight"))
@@ -38,6 +39,7 @@ class KeyboardComponent extends Component{
         
         this.timeLeftToMove -= Time.deltaTime
 
+        // check if it's time to move, then moves
         if(this.timeLeftToMove <= 0){
             this.timeLeftToMove = this.timeBetweenMoves
 
@@ -53,26 +55,34 @@ class KeyboardComponent extends Component{
             if(this.nextMove == this.right)
                 this.transform.x += this.speed
 
-            let bodyPart = this.nextBodyPart
+            let currentBodyPart = this
 
-            while(bodyPart){
-                let bodyPartOldX = bodyPart.transform.x
-                let bodyPartOldY = bodyPart.transform.y
+            // update body segments
+            while(currentBodyPart){
+                let currentBodyPartOldX = currentBodyPart.transform.x
+                let currentBodyPartOldY = currentBodyPart.transform.y
     
-                bodyPart.transform.x = movingFromX
-                bodyPart.transform.y = movingFromY
+                currentBodyPart.transform.x = movingFromX
+                currentBodyPart.transform.y = movingFromY
     
-                movingFromX = bodyPartOldX
-                movingFromY = bodyPartOldY
+                movingFromX = currentBodyPartOldX
+                movingFromY = currentBodyPartOldY
     
-                if(this.isGrowingThisFrame == true && !bodyPart.nextBodyPart){
-                    let toInstantiate = new BodySegmentGameObject();
+                if(this.isGrowingThisFrame == true && !currentBodyPart.nextBodyPart){
+                    if(!GameObject.find("BodySegmentGameObject")){
+                        this.isLinkedToHead = true
+                    }else{
+                        this.isLinkedToHead = false
+                    }
+
+                    let toInstantiate = new BodySegmentGameObject(this.isLinkedToHead);
                     GameObject.instantiate(toInstantiate, movingFromX, movingFromY, 20, 20)
-                    bodyPart.nextBodyPart = toInstantiate;
+
+                    currentBodyPart.nextBodyPart = toInstantiate;
                     this.isGrowingThisFrame = false
                     break;
                 }
-                bodyPart = bodyPart.nextBodyPart
+                currentBodyPart = currentBodyPart.nextBodyPart
             }
         }
     }
