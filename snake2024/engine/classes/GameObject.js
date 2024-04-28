@@ -1,5 +1,6 @@
 class GameObject {
     components = []
+    layer = 0
     constructor(name){
         this.name = name
         this.addComponent(new Transform())

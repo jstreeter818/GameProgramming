@@ -14,6 +14,8 @@ import "/engine/components/Rectangle.js"
 import "/engine/components/Text.js"
 import "/engine/components/Transform.js"
 
+import "/engine/prefabs/Camera.js"
+
 import "/engine/static/Collisions.js"
 import "/engine/static/CollisionsGeometric.js"
 import "/engine/static/Input.js"
@@ -41,6 +43,8 @@ class Engine {
             }
         }
 
+        //Engine.currentScene.draw(ctx)
+
         if(!Engine.isSystemPaused){
             Engine.currentScene._start(ctx)
 
@@ -53,14 +57,27 @@ class Engine {
 
         Input.update()
 
-        Time.update()
+        Time.update(ctx)
     }
 
-    static setup(){
+    static setup(name = ""){
+        if(name != ""){
+            document.title = name
+        }    
+
+        document.body.style.margin = "0px"
+        document.body.style.overflow = "hidden"
+        document.body.style.backgroundColor = "black"
+
+        let canvas = document.createElement("canvas")
+        canvas.id = "canv"
+        document.body.appendChild(canvas)
+
         document.addEventListener("keydown", Input.keydown)
         document.addEventListener("keyup", Input.keyup)
         document.addEventListener("mousemove", Input.mousemove)
         document.addEventListener("mouseup", Input.mouseup)
+        document.addEventListener("wheel", Input.wheel)
 
         setInterval(Engine.gameLoop, Time.ms)
     }
