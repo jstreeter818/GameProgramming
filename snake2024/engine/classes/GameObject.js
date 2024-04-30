@@ -4,7 +4,7 @@ class GameObject {
     constructor(name){
         this.name = name
         this.addComponent(new Transform())
-        this.markForDestroy = false;
+        this.markForDestroy = false
     }
 
     get transform(){

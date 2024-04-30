@@ -81,6 +81,11 @@ class Engine {
 
         setInterval(Engine.gameLoop, Time.ms)
     }
+
+    static changeScene(scene){
+        EventSystem.listeners = []
+        Engine.currentScene = scene
+    }
 }
 
 window.Engine = Engine

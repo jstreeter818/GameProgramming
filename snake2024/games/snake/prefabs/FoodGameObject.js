@@ -1,6 +1,6 @@
 class FoodGameObject extends GameObject{
     constructor(name = "FoodGameObject"){
-        super(name);
+        super(name)
     }
     start(ctx){
         this.addComponent(new EatComponent())

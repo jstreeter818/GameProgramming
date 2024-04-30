@@ -1,6 +1,6 @@
 class Scene {
     gameObjects = []
-    hasStarted = false;
+    hasStarted = false
 
     logicalWidth = -1
 
@@ -20,7 +20,7 @@ class Scene {
         if(!this.hasStarted){
             this.hasStarted = true
             if (this.start){
-                this.start(ctx);
+                this.start(ctx)
             }
             for(const gameObject of this.gameObjects){
                 if(gameObject.start){

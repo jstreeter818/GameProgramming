@@ -26,7 +26,7 @@ class KeyboardComponent extends Component{
         }
 
         if(event.name == "speedIncrease"){
-            this.timeBetweenMoves -= 0.05
+            this.timeBetweenMoves -= 0.02
         }
     }
 
@@ -73,10 +73,10 @@ class KeyboardComponent extends Component{
                 movingFromY = currentBodyPartOldY
     
                 if(this.isGrowingThisFrame == true && !currentBodyPart.nextBodyPart){
-                    let toInstantiate = new BodySegmentGameObject();
+                    let toInstantiate = new BodySegmentGameObject()
                     GameObject.instantiate(toInstantiate, movingFromX, movingFromY, 20, 20)
 
-                    currentBodyPart.nextBodyPart = toInstantiate;
+                    currentBodyPart.nextBodyPart = toInstantiate
                     this.isGrowingThisFrame = false
                     break;
                 }

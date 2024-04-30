@@ -17,25 +17,25 @@ class MainScene extends Scene {
   }
 
   start(ctx){
-    let randomX = Math.floor(Math.random() * 80) * 20
-    let randomY = Math.floor(Math.random() * 50) * 20
+    let randomX = (Math.floor(Math.random() * 80) * 20) + 10
+    let randomY = (Math.floor(Math.random() * 50) * 20) + 10
 
     let snakeHeadGameObject = new GameObject("SnakeHeadGameObject")
-    snakeHeadGameObject.addComponent(new Rectangle("red"))
+    snakeHeadGameObject.addComponent(new Rectangle("black"))
     snakeHeadGameObject.addComponent(new KeyboardComponent())
     snakeHeadGameObject.addComponent(new DeathComponent())
     GameObject.instantiate(snakeHeadGameObject, randomX, randomY, 20, 20)
 
     snakeHeadGameObject.getComponent("KeyboardComponent").nextBodyPart = snakeHeadGameObject
 
-    randomX = Math.floor(Math.random() * 80) * 20
-    randomY = Math.floor(Math.random() * 50) * 20
+    randomX = (Math.floor(Math.random() * 80) * 20) + 10
+    randomY = (Math.floor(Math.random() * 50) * 20) + 10
 
     while(randomX == snakeHeadGameObject.transform.x){
-      randomX = Math.floor(Math.random() * 80) * 20
+      randomX = (Math.floor(Math.random() * 80) * 20) + 10
     }
     while(randomY == snakeHeadGameObject.transform.y){
-      randomY = Math.floor(Math.random() * 50) * 20
+      randomY = (Math.floor(Math.random() * 50) * 20) + 10
     }
 
     GameObject.instantiate(new FoodGameObject(), randomX, randomY, 20, 20)
